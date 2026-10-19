@@ -1,0 +1,6 @@
+{
+  "name": "LVGL GUI Generator for Embedded Systems",
+  "description": "Visual drag-and-drop UI designer and code generator for LVGL v8 and v9 embedded graphics on ESP32, STM32, Raspberry Pi, and Arduino.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
