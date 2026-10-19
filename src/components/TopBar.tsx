@@ -5,13 +5,15 @@ interface TopBarProps {
   onOpenTemplates: () => void;
   onOpenHardware: () => void;
   onOpenCodeExport: () => void;
-  activeView: 'designer' | 'templates' | 'hardware' | 'code';
+  onOpenReadme: () => void;
+  activeView: 'designer' | 'templates' | 'hardware' | 'code' | 'readme';
 }
 
 export const TopBar: React.FC<TopBarProps> = ({
   onOpenTemplates,
   onOpenHardware,
   onOpenCodeExport,
+  onOpenReadme,
   activeView,
 }) => {
   return (
@@ -22,8 +24,8 @@ export const TopBar: React.FC<TopBarProps> = ({
         <span>LVGL Studio</span>
       </div>
 
-      {/* Zone 2: 4 clean single-line text navigation links */}
-      <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+      {/* Zone 2: Clean navigation links */}
+      <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
         <button
           onClick={() => {}}
           className={`hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
@@ -42,13 +44,21 @@ export const TopBar: React.FC<TopBarProps> = ({
           onClick={onOpenHardware}
           className="hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer"
         >
-          Hardware & RAM
+          Hardware &amp; RAM
         </button>
         <button
           onClick={onOpenCodeExport}
           className="hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer"
         >
           Code Preview
+        </button>
+        <button
+          onClick={onOpenReadme}
+          className={`hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer flex items-center gap-1.5 ${
+            activeView === 'readme' ? 'text-cyan-400 font-semibold' : 'text-slate-300'
+          }`}
+        >
+          <span>Docs &amp; README</span>
         </button>
       </nav>
 

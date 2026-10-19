@@ -11,6 +11,7 @@ import { LiveEventLog, EventLogItem } from './components/LiveEventLog';
 import { HardwareMemoryModal } from './components/HardwareMemoryModal';
 import { TemplatesModal } from './components/TemplatesModal';
 import { CodeExportModal } from './components/CodeExportModal';
+import { ReadmeModal } from './components/ReadmeModal';
 import { Undo2, Redo2, Grid, RotateCcw, Monitor, Sparkles, Cpu, Tv, Cable, Database, Fingerprint } from 'lucide-react';
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
   const [isTemplatesOpen, setIsTemplatesOpen] = useState(false);
   const [isHardwareOpen, setIsHardwareOpen] = useState(false);
   const [isCodeExportOpen, setIsCodeExportOpen] = useState(false);
+  const [isReadmeOpen, setIsReadmeOpen] = useState(false);
 
   // Live simulation event logs
   const [eventLogs, setEventLogs] = useState<EventLogItem[]>([]);
@@ -510,6 +512,7 @@ export default function App() {
         setIsTemplatesOpen(false);
         setIsHardwareOpen(false);
         setIsCodeExportOpen(false);
+        setIsReadmeOpen(false);
       } else if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key) && selectedWidgetId) {
         e.preventDefault();
         const step = e.shiftKey ? 10 : 1;
@@ -540,10 +543,21 @@ export default function App() {
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#070A11] text-slate-100 font-sans">
       {/* Strict 3-Zone Top Bar */}
       <TopBar
-        activeView={isTemplatesOpen ? 'templates' : isHardwareOpen ? 'hardware' : isCodeExportOpen ? 'code' : 'designer'}
+        activeView={
+          isReadmeOpen
+            ? 'readme'
+            : isTemplatesOpen
+            ? 'templates'
+            : isHardwareOpen
+            ? 'hardware'
+            : isCodeExportOpen
+            ? 'code'
+            : 'designer'
+        }
         onOpenTemplates={() => setIsTemplatesOpen(true)}
         onOpenHardware={() => setIsHardwareOpen(true)}
         onOpenCodeExport={() => setIsCodeExportOpen(true)}
+        onOpenReadme={() => setIsReadmeOpen(true)}
       />
 
       {/* Sub-header Workspace Control Strip with direct MCU, LCD Type, and Port selectors */}
@@ -868,6 +882,11 @@ export default function App() {
             },
           }))
         }
+      />
+
+      <ReadmeModal
+        isOpen={isReadmeOpen}
+        onClose={() => setIsReadmeOpen(false)}
       />
     </div>
   );
